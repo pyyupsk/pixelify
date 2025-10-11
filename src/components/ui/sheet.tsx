@@ -1,12 +1,14 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
-import { XIcon } from "lucide-react";
 import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
+function Sheet({
+  ...props
+}: Readonly<React.ComponentProps<typeof SheetPrimitive.Root>>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;
 }
 
@@ -24,7 +26,7 @@ function SheetClose({
 
 function SheetPortal({
   ...props
-}: React.ComponentProps<typeof SheetPrimitive.Portal>) {
+}: Readonly<React.ComponentProps<typeof SheetPrimitive.Portal>>) {
   return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />;
 }
 
@@ -73,7 +75,7 @@ function SheetContent({
       >
         {children}
         <SheetPrimitive.Close className="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-          <XIcon className="size-4" />
+          <Icon icon="pixelarticons:close" width={16} height={16} />
           <span className="sr-only">Close</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>

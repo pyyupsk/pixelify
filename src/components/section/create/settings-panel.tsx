@@ -38,8 +38,8 @@ export function SettingsPanel() {
           <input
             id="pixel-size"
             type="range"
-            min="2"
-            max="32"
+            min="1"
+            max="100"
             value={pixelSize}
             onChange={(e) => setPixelSize(Number(e.target.value))}
             className="w-full accent-primary"

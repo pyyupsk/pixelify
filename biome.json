@@ -37,6 +37,16 @@
             "functions": ["clsx", "cva", "cn"]
           }
         }
+      },
+      "style": {
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "lucide-react": "Use '@iconify/react' with pixelarticons instead.\nBrowse icons at https://icon-sets.iconify.design/pixelarticons/"
+            }
+          }
+        }
       }
     },
     "domains": {
