@@ -34,10 +34,9 @@ export function Footer() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex items-center gap-2 text-muted-foreground text-sm transition-colors hover:text-foreground"
+                  className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                   aria-label={item.label}
                 >
-                  <Icon icon={item.icon} width={16} height={16} />
                   {item.label}
                 </Link>
               ))}
