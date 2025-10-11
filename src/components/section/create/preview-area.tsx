@@ -8,13 +8,8 @@ import { useImageUpload } from "@/hooks/use-upload";
 
 export function PreviewArea() {
   const { image } = useImageUpload();
-  const {
-    originalCanvasRef,
-    pixelatedCanvasRef,
-    isProcessing,
-    loadImage,
-    downloadPixelArt,
-  } = usePixelArt();
+  const { pixelatedCanvasRef, isProcessing, loadImage, downloadPixelArt } =
+    usePixelArt();
   const resetAll = useSetAtom(resetAtom);
 
   // Load and process image when it changes
@@ -26,59 +21,46 @@ export function PreviewArea() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between border-b pb-4">
-        <h3 className="font-semibold text-lg">Preview</h3>
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => resetAll()}
-            aria-label="Reset image"
-          >
-            <Icon icon="pixelarticons:close" width={16} height={16} />
-            Reset
-          </Button>
-          <Button
-            size="sm"
-            onClick={downloadPixelArt}
-            disabled={isProcessing}
-            aria-label="Download pixel art"
-          >
-            <Icon icon="pixelarticons:download" width={16} height={16} />
-            Download
-          </Button>
-        </div>
+      <div className="flex items-center justify-between">
+        <h3 className="font-semibold text-lg">
+          Preview{" "}
+          {isProcessing && (
+            <span className="text-muted-foreground">(Processing...)</span>
+          )}
+        </h3>
+
+        {/* Reset */}
+        <button
+          type="button"
+          onClick={() => resetAll()}
+          aria-label="Reset image"
+          className="flex items-center gap-2 text-muted-foreground"
+        >
+          <Icon icon="pixelarticons:close" width={16} height={16} />
+          <span className="text-sm">Reset</span>
+        </button>
       </div>
 
-      {/* Image Comparison */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Original */}
-        <div className="space-y-3">
-          <h4 className="font-medium text-muted-foreground text-sm">
-            Original
-          </h4>
-          <div className="border bg-muted/20 p-4">
-            <canvas
-              ref={originalCanvasRef}
-              className="mx-auto max-h-[400px] w-auto"
-            />
-          </div>
-        </div>
-
-        {/* Pixelated */}
-        <div className="space-y-3">
-          <h4 className="font-medium text-muted-foreground text-sm">
-            Pixel Art {isProcessing && "(Processing...)"}
-          </h4>
-          <div className="border bg-muted/20 p-4">
-            <canvas
-              ref={pixelatedCanvasRef}
-              className="mx-auto max-h-[400px] w-auto"
-              style={{ imageRendering: "pixelated" }}
-            />
-          </div>
-        </div>
+      {/* Pixel Art Preview */}
+      <div className="border bg-muted/20">
+        <canvas
+          ref={pixelatedCanvasRef}
+          className="mx-auto w-full max-w-full"
+          style={{ imageRendering: "pixelated" }}
+        />
       </div>
+
+      {/* Download Button */}
+      <Button
+        size="sm"
+        onClick={downloadPixelArt}
+        disabled={isProcessing}
+        aria-label="Download pixel art"
+        className="w-full"
+      >
+        <Icon icon="pixelarticons:download" width={16} height={16} />
+        Download
+      </Button>
     </div>
   );
 }

@@ -25,24 +25,8 @@ export function usePixelArt() {
   const saturation = useAtomValue(saturationAtom);
   const [isProcessing, setIsProcessing] = useAtom(isProcessingAtom);
 
-  const originalCanvasRef = useRef<HTMLCanvasElement>(null);
   const pixelatedCanvasRef = useRef<HTMLCanvasElement>(null);
   const sourceImageRef = useRef<HTMLImageElement | null>(null);
-
-  // Draw original image to canvas
-  const drawOriginalImage = useCallback((img: HTMLImageElement) => {
-    const originalCanvas = originalCanvasRef.current;
-    if (!originalCanvas) return;
-
-    const ctx = originalCanvas.getContext("2d");
-    if (!ctx) return;
-
-    const { width, height } = calculateScaledDimensions(img.width, img.height);
-
-    originalCanvas.width = width;
-    originalCanvas.height = height;
-    ctx.drawImage(img, 0, 0, width, height);
-  }, []);
 
   // Process image into pixel art
   const processPixelArt = useCallback(() => {
@@ -136,12 +120,11 @@ export function usePixelArt() {
       img.crossOrigin = "anonymous";
       img.onload = () => {
         sourceImageRef.current = img;
-        drawOriginalImage(img);
         processPixelArt();
       };
       img.src = imageDataUrl;
     },
-    [drawOriginalImage, processPixelArt],
+    [processPixelArt],
   );
 
   // Download pixel art
@@ -167,7 +150,6 @@ export function usePixelArt() {
 
   return {
     isProcessing,
-    originalCanvasRef,
     pixelatedCanvasRef,
     loadImage,
     downloadPixelArt,
