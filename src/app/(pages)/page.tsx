@@ -150,12 +150,7 @@ export default function HomePage() {
             <div className="flex flex-col gap-4 pt-6 sm:flex-row sm:justify-center">
               <Button size="lg" asChild>
                 <Link href="/create" aria-label="Get Started Free">
-                  <Icon
-                    icon="pixelarticons:sparkles"
-                    width={20}
-                    height={20}
-                    className="mr-2"
-                  />
+                  <Icon icon="pixelarticons:sparkles" width={20} height={20} />
                   Get Started Free
                 </Link>
               </Button>
@@ -165,7 +160,6 @@ export default function HomePage() {
                     icon="pixelarticons:image-gallery"
                     width={20}
                     height={20}
-                    className="mr-2"
                   />
                   Browse Examples
                 </Link>

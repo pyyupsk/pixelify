@@ -44,12 +44,7 @@ export function Header() {
         <div className="flex items-center gap-4">
           <Button asChild className="hidden sm:flex">
             <Link href="/create" aria-label="Get Started">
-              <Icon
-                icon="pixelarticons:sparkles"
-                width={16}
-                height={16}
-                className="mr-2"
-              />
+              <Icon icon="pixelarticons:sparkles" width={16} height={16} />
               Get Started
             </Link>
           </Button>
@@ -88,12 +83,7 @@ export function Header() {
               <div className="mt-4 flex justify-center px-3">
                 <Button asChild className="w-full">
                   <Link href="/create" aria-label="Get Started">
-                    <Icon
-                      icon="pixelarticons:zap"
-                      width={16}
-                      height={16}
-                      className="mr-2"
-                    />
+                    <Icon icon="pixelarticons:zap" width={16} height={16} />
                     Get Started
                   </Link>
                 </Button>

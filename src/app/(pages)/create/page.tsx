@@ -51,12 +51,23 @@ export default function CreatePage() {
     const scaledWidth = Math.floor(width / pixelSize);
     const scaledHeight = Math.floor(height / pixelSize);
 
-    // Draw image scaled down
-    ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(sourceImage, 0, 0, scaledWidth, scaledHeight);
+    // Create temporary canvas for processing
+    const tempCanvas = document.createElement("canvas");
+    tempCanvas.width = scaledWidth;
+    tempCanvas.height = scaledHeight;
+    const tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
+
+    if (!tempCtx) {
+      setIsProcessing(false);
+      return;
+    }
+
+    // Draw image scaled down to temp canvas
+    tempCtx.imageSmoothingEnabled = false;
+    tempCtx.drawImage(sourceImage, 0, 0, scaledWidth, scaledHeight);
 
     // Get image data for color processing
-    const imageData = ctx.getImageData(0, 0, scaledWidth, scaledHeight);
+    const imageData = tempCtx.getImageData(0, 0, scaledWidth, scaledHeight);
     const data = imageData.data;
 
     // Apply color quantization
@@ -159,12 +170,23 @@ export default function CreatePage() {
       }
     }
 
-    // Put back processed image data
-    ctx.putImageData(imageData, 0, 0);
+    // Put processed image data back to temp canvas
+    tempCtx.putImageData(imageData, 0, 0);
 
-    // Scale back up to original size with sharp edges
+    // Clear main canvas and scale up with sharp edges
+    ctx.clearRect(0, 0, width, height);
     ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(canvas, 0, 0, scaledWidth, scaledHeight, 0, 0, width, height);
+    ctx.drawImage(
+      tempCanvas,
+      0,
+      0,
+      scaledWidth,
+      scaledHeight,
+      0,
+      0,
+      width,
+      height,
+    );
 
     setIsProcessing(false);
   }, [pixelSize, colorDepth, dithering]);
@@ -341,12 +363,7 @@ export default function CreatePage() {
                       onClick={handleReset}
                       aria-label="Reset image"
                     >
-                      <Icon
-                        icon="pixelarticons:close"
-                        width={16}
-                        height={16}
-                        className="mr-2"
-                      />
+                      <Icon icon="pixelarticons:close" width={16} height={16} />
                       Reset
                     </Button>
                     <Button
@@ -359,7 +376,6 @@ export default function CreatePage() {
                         icon="pixelarticons:download"
                         width={16}
                         height={16}
-                        className="mr-2"
                       />
                       Download
                     </Button>
