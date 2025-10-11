@@ -1,0 +1,180 @@
+/* 8-bit Gamepad Logo Styles */
+.gamepad-logo {
+  shape-rendering: crispEdges;
+  image-rendering: pixelated;
+}
+
+/* Gamepad colors */
+.gamepad-body {
+  fill: var(--primary);
+}
+
+.gamepad-dpad {
+  fill: var(--foreground);
+}
+
+.gamepad-button {
+  fill: var(--accent);
+}
+
+.gamepad-center {
+  fill: var(--muted-foreground);
+}
+
+.gamepad-shoulder {
+  fill: var(--primary);
+  opacity: 0.8;
+}
+
+.gamepad-grip {
+  fill: var(--primary);
+  opacity: 0.6;
+}
+
+/* Animation: D-pad press */
+@keyframes dpad-press {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+}
+
+/* Animation: Button press sequence */
+@keyframes button-press {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.85);
+  }
+}
+
+/* Animation: Shoulder button press */
+@keyframes shoulder-press {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(1px);
+    opacity: 1;
+  }
+}
+
+/* Animation: Center buttons blink */
+@keyframes center-blink {
+  0%,
+  90%,
+  100% {
+    opacity: 0.5;
+  }
+  95% {
+    opacity: 1;
+  }
+}
+
+/* Animation: Body pulse */
+@keyframes body-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Apply animations when animated */
+.gamepad-logo.animated {
+  animation: body-pulse 3s ease-in-out infinite;
+}
+
+.gamepad-logo.animated .dpad-vertical {
+  animation: dpad-press 1.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.gamepad-logo.animated .dpad-horizontal {
+  animation: dpad-press 1.2s ease-in-out infinite;
+  animation-delay: 0.6s;
+  transform-origin: center;
+}
+
+/* Staggered button animations */
+.gamepad-logo.animated .button-top {
+  animation: button-press 2s ease-in-out infinite;
+  animation-delay: 0s;
+  transform-origin: center;
+}
+
+.gamepad-logo.animated .button-right {
+  animation: button-press 2s ease-in-out infinite;
+  animation-delay: 0.3s;
+  transform-origin: center;
+}
+
+.gamepad-logo.animated .button-bottom {
+  animation: button-press 2s ease-in-out infinite;
+  animation-delay: 0.6s;
+  transform-origin: center;
+}
+
+.gamepad-logo.animated .button-left {
+  animation: button-press 2s ease-in-out infinite;
+  animation-delay: 0.9s;
+  transform-origin: center;
+}
+
+/* Center buttons */
+.gamepad-logo.animated .center-left {
+  animation: center-blink 4s ease-in-out infinite;
+}
+
+.gamepad-logo.animated .center-right {
+  animation: center-blink 4s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+/* Shoulder buttons */
+.gamepad-logo.animated .shoulder-left {
+  animation: shoulder-press 3s ease-in-out infinite;
+}
+
+.gamepad-logo.animated .shoulder-right {
+  animation: shoulder-press 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* Hover effect - speed up all animations */
+.gamepad-logo:hover.animated {
+  animation-duration: 1.5s;
+}
+
+.gamepad-logo:hover.animated .gamepad-dpad,
+.gamepad-logo:hover.animated .gamepad-button {
+  animation-duration: 0.8s;
+}
+
+.gamepad-logo:hover.animated .gamepad-shoulder {
+  animation-duration: 1.2s;
+}
+
+.gamepad-logo:hover {
+  cursor: pointer;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .gamepad-body {
+    filter: brightness(1.1);
+  }
+}

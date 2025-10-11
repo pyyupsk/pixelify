@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-
+import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -18,7 +18,7 @@ export function Header() {
       <div className="container relative flex h-16 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-          <Icon icon="pixelarticons:image" width={24} height={24} />
+          <Logo size={32} />
           Pixelify
         </Link>
 
@@ -52,15 +52,15 @@ export function Header() {
           {/* Mobile Menu */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <div className="md:hidden">
                 <Icon icon="pixelarticons:menu" width={24} height={24} />
                 <span className="sr-only">Toggle menu</span>
-              </Button>
+              </div>
             </SheetTrigger>
             <SheetContent side="right">
               <SheetHeader className="border-b">
                 <SheetTitle className="flex items-center gap-2">
-                  <Icon icon="pixelarticons:image" width={24} height={24} />
+                  <Logo size={28} />
                   Pixelify
                 </SheetTitle>
                 <SheetDescription>
