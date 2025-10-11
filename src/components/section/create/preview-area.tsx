@@ -1,22 +1,29 @@
 import { Icon } from "@iconify/react";
-import type { RefObject } from "react";
+import { useSetAtom } from "jotai";
+import { useEffect } from "react";
+import { resetAtom } from "@/atoms/pixel-art";
 import { Button } from "@/components/ui/button";
+import { usePixelArt } from "@/hooks/use-canvas";
+import { useImageUpload } from "@/hooks/use-upload";
 
-type Props = {
-  originalCanvasRef: RefObject<HTMLCanvasElement | null>;
-  pixelatedCanvasRef: RefObject<HTMLCanvasElement | null>;
-  isProcessing: boolean;
-  onReset: () => void;
-  onDownload: () => void;
-};
+export function PreviewArea() {
+  const { image } = useImageUpload();
+  const {
+    originalCanvasRef,
+    pixelatedCanvasRef,
+    isProcessing,
+    loadImage,
+    downloadPixelArt,
+  } = usePixelArt();
+  const resetAll = useSetAtom(resetAtom);
 
-export function PreviewArea({
-  originalCanvasRef,
-  pixelatedCanvasRef,
-  isProcessing,
-  onReset,
-  onDownload,
-}: Readonly<Props>) {
+  // Load and process image when it changes
+  useEffect(() => {
+    if (image) {
+      loadImage(image);
+    }
+  }, [image, loadImage]);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between border-b pb-4">
@@ -25,7 +32,7 @@ export function PreviewArea({
           <Button
             variant="outline"
             size="sm"
-            onClick={onReset}
+            onClick={() => resetAll()}
             aria-label="Reset image"
           >
             <Icon icon="pixelarticons:close" width={16} height={16} />
@@ -33,7 +40,7 @@ export function PreviewArea({
           </Button>
           <Button
             size="sm"
-            onClick={onDownload}
+            onClick={downloadPixelArt}
             disabled={isProcessing}
             aria-label="Download pixel art"
           >

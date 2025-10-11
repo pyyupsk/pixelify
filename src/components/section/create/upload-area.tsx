@@ -1,26 +1,21 @@
 import { Icon } from "@iconify/react";
+import { useImageUpload } from "@/hooks/use-upload";
 
-type Props = {
-  isDragging: boolean;
-  onDragOver: (e: React.DragEvent) => void;
-  onDragLeave: (e: React.DragEvent) => void;
-  onDrop: (e: React.DragEvent) => void;
-  onFileInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+export function UploadArea() {
+  const {
+    isDragging,
+    handleDragOver,
+    handleDragLeave,
+    handleDrop,
+    handleFileInput,
+  } = useImageUpload();
 
-export function UploadArea({
-  isDragging,
-  onDragOver,
-  onDragLeave,
-  onDrop,
-  onFileInput,
-}: Readonly<Props>) {
   return (
     <label
       htmlFor="file-upload"
-      onDragOver={onDragOver}
-      onDragLeave={onDragLeave}
-      onDrop={onDrop}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
       className={`flex min-h-[400px] cursor-pointer flex-col items-center justify-center border-2 border-dashed bg-muted/20 p-12 transition-colors ${
         isDragging
           ? "border-primary bg-primary/5"
@@ -45,7 +40,7 @@ export function UploadArea({
         <input
           type="file"
           accept="image/*"
-          onChange={onFileInput}
+          onChange={handleFileInput}
           className="hidden"
           id="file-upload"
           aria-label="Upload image"

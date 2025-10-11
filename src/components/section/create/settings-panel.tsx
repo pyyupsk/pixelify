@@ -1,25 +1,26 @@
-type ColorDepth = 8 | 16 | 32 | 256;
-type DitheringMode = "none" | "floyd-steinberg" | "ordered";
+import { useAtom, useAtomValue } from "jotai";
+import {
+  brightnessAtom,
+  type ColorDepth,
+  colorDepthAtom,
+  contrastAtom,
+  ditheringAtom,
+  imageAtom,
+  pixelSizeAtom,
+  saturationAtom,
+} from "@/atoms/pixel-art";
 
-type Props = {
-  pixelSize: number;
-  colorDepth: ColorDepth;
-  dithering: DitheringMode;
-  hasImage: boolean;
-  onPixelSizeChange: (value: number) => void;
-  onColorDepthChange: (depth: ColorDepth) => void;
-  onDitheringChange: (mode: DitheringMode) => void;
-};
+export function SettingsPanel() {
+  const [pixelSize, setPixelSize] = useAtom(pixelSizeAtom);
+  const [colorDepth, setColorDepth] = useAtom(colorDepthAtom);
+  const [dithering, setDithering] = useAtom(ditheringAtom);
+  const [brightness, setBrightness] = useAtom(brightnessAtom);
+  const [contrast, setContrast] = useAtom(contrastAtom);
+  const [saturation, setSaturation] = useAtom(saturationAtom);
+  const image = useAtomValue(imageAtom);
 
-export function SettingsPanel({
-  pixelSize,
-  colorDepth,
-  dithering,
-  hasImage,
-  onPixelSizeChange,
-  onColorDepthChange,
-  onDitheringChange,
-}: Readonly<Props>) {
+  const hasImage = !!image;
+
   return (
     <div className="border bg-card p-6">
       <h3 className="mb-6 font-semibold text-lg">Settings</h3>
@@ -40,7 +41,7 @@ export function SettingsPanel({
             min="2"
             max="32"
             value={pixelSize}
-            onChange={(e) => onPixelSizeChange(Number(e.target.value))}
+            onChange={(e) => setPixelSize(Number(e.target.value))}
             className="w-full accent-primary"
             disabled={!hasImage}
             aria-label="Adjust pixel size"
@@ -61,7 +62,7 @@ export function SettingsPanel({
                 <button
                   key={depth}
                   type="button"
-                  onClick={() => onColorDepthChange(depth)}
+                  onClick={() => setColorDepth(depth)}
                   className={`border p-3 text-sm transition-colors disabled:opacity-50 ${
                     colorDepth === depth
                       ? "bg-primary text-primary-foreground"
@@ -91,7 +92,7 @@ export function SettingsPanel({
               <button
                 key={option.value}
                 type="button"
-                onClick={() => onDitheringChange(option.value)}
+                onClick={() => setDithering(option.value)}
                 className={`border p-3 text-left text-sm transition-colors disabled:opacity-50 ${
                   dithering === option.value
                     ? "bg-primary text-primary-foreground"
@@ -103,6 +104,87 @@ export function SettingsPanel({
                 {option.label}
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* Brightness */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <label htmlFor="brightness" className="font-medium text-sm">
+              Brightness
+            </label>
+            <span className="font-mono text-muted-foreground text-sm">
+              {brightness > 0 ? `+${brightness}` : brightness}
+            </span>
+          </div>
+          <input
+            id="brightness"
+            type="range"
+            min="-100"
+            max="100"
+            value={brightness}
+            onChange={(e) => setBrightness(Number(e.target.value))}
+            className="w-full accent-primary"
+            disabled={!hasImage}
+            aria-label="Adjust brightness"
+          />
+          <div className="flex justify-between text-muted-foreground text-xs">
+            <span>Dark</span>
+            <span>Bright</span>
+          </div>
+        </div>
+
+        {/* Contrast */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <label htmlFor="contrast" className="font-medium text-sm">
+              Contrast
+            </label>
+            <span className="font-mono text-muted-foreground text-sm">
+              {contrast > 0 ? `+${contrast}` : contrast}
+            </span>
+          </div>
+          <input
+            id="contrast"
+            type="range"
+            min="-100"
+            max="100"
+            value={contrast}
+            onChange={(e) => setContrast(Number(e.target.value))}
+            className="w-full accent-primary"
+            disabled={!hasImage}
+            aria-label="Adjust contrast"
+          />
+          <div className="flex justify-between text-muted-foreground text-xs">
+            <span>Low</span>
+            <span>High</span>
+          </div>
+        </div>
+
+        {/* Saturation */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <label htmlFor="saturation" className="font-medium text-sm">
+              Saturation
+            </label>
+            <span className="font-mono text-muted-foreground text-sm">
+              {saturation > 0 ? `+${saturation}` : saturation}
+            </span>
+          </div>
+          <input
+            id="saturation"
+            type="range"
+            min="-100"
+            max="100"
+            value={saturation}
+            onChange={(e) => setSaturation(Number(e.target.value))}
+            className="w-full accent-primary"
+            disabled={!hasImage}
+            aria-label="Adjust saturation"
+          />
+          <div className="flex justify-between text-muted-foreground text-xs">
+            <span>Grayscale</span>
+            <span>Vibrant</span>
           </div>
         </div>
       </div>
