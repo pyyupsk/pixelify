@@ -17,7 +17,11 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container relative flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl">
+        <Link
+          href="/"
+          className="flex items-center gap-2 font-bold text-xl"
+          aria-label="Pixelify"
+        >
           <Logo size={32} />
           Pixelify
         </Link>
@@ -29,6 +33,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+              aria-label={item.label}
             >
               {item.label}
             </Link>
@@ -38,7 +43,7 @@ export function Header() {
         {/* CTA Button */}
         <div className="flex items-center gap-4">
           <Button asChild className="hidden sm:flex">
-            <Link href="/create">
+            <Link href="/create" aria-label="Get Started">
               <Icon
                 icon="pixelarticons:sparkles"
                 width={16}
@@ -73,6 +78,7 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                    aria-label={item.label}
                   >
                     <Icon icon={item.icon} width={20} height={20} />
                     {item.label}
@@ -81,7 +87,7 @@ export function Header() {
               </nav>
               <div className="mt-4 flex justify-center px-3">
                 <Button asChild className="w-full">
-                  <Link href="/create">
+                  <Link href="/create" aria-label="Get Started">
                     <Icon
                       icon="pixelarticons:zap"
                       width={16}

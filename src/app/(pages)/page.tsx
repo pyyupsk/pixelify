@@ -40,10 +40,14 @@ export default function HomePage() {
           {/* CTA Buttons */}
           <div className="flex flex-col gap-4 pt-4 sm:flex-row">
             <Button asChild>
-              <Link href="/create">Start Creating</Link>
+              <Link href="/create" aria-label="Start Creating">
+                Start Creating
+              </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/examples">View Examples</Link>
+              <Link href="/examples" aria-label="View Examples">
+                View Examples
+              </Link>
             </Button>
           </div>
 
@@ -145,7 +149,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col gap-4 pt-6 sm:flex-row sm:justify-center">
               <Button size="lg" asChild>
-                <Link href="/create">
+                <Link href="/create" aria-label="Get Started Free">
                   <Icon
                     icon="pixelarticons:sparkles"
                     width={20}
@@ -156,7 +160,7 @@ export default function HomePage() {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="/examples">
+                <Link href="/examples" aria-label="Browse Examples">
                   <Icon
                     icon="pixelarticons:image-gallery"
                     width={20}
