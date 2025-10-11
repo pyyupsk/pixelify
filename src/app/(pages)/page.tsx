@@ -2,6 +2,9 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { features } from "@/constants/features";
+import { pills } from "@/constants/pills";
+import { steps } from "@/constants/steps";
 
 export default function HomePage() {
   return (
@@ -46,22 +49,15 @@ export default function HomePage() {
 
           {/* Feature Pills */}
           <div className="flex flex-wrap justify-center gap-3 pt-8">
-            <div className="flex items-center gap-2 px-3 text-sm">
-              <Icon icon="pixelarticons:zap" width={16} height={16} />
-              Instant Processing
-            </div>
-            <div className="flex items-center gap-2 px-3 text-sm">
-              <Icon icon="pixelarticons:paint-bucket" width={16} height={16} />
-              Multiple Styles
-            </div>
-            <div className="flex items-center gap-2 px-3 text-sm">
-              <Icon icon="pixelarticons:download" width={16} height={16} />
-              Easy Download
-            </div>
-            <div className="flex items-center gap-2 px-3 text-sm">
-              <Icon icon="pixelarticons:coin" width={16} height={16} />
-              Free to Use
-            </div>
+            {pills.map((pill) => (
+              <div
+                key={pill.label}
+                className="flex items-center gap-2 px-3 text-sm"
+              >
+                <Icon icon={pill.icon} width={16} height={16} />
+                {pill.label}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -80,107 +76,20 @@ export default function HomePage() {
 
         {/* Feature Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {/* Feature 1 */}
-          <div className="space-y-4 border bg-card p-6">
-            <div className="flex size-12 items-center justify-center bg-primary/10">
-              <Icon
-                icon="pixelarticons:zap"
-                width={24}
-                height={24}
-                className="text-primary"
-              />
+          {features.map((feature) => (
+            <div key={feature.title} className="space-y-4 border bg-card p-6">
+              <div className="flex size-12 items-center justify-center bg-primary/10">
+                <Icon
+                  icon={feature.icon}
+                  width={24}
+                  height={24}
+                  className="text-primary"
+                />
+              </div>
+              <h3 className="font-semibold text-xl">{feature.title}</h3>
+              <p className="text-muted-foreground">{feature.description}</p>
             </div>
-            <h3 className="font-semibold text-xl">Lightning Fast</h3>
-            <p className="text-muted-foreground">
-              Transform your images in seconds with our optimized processing
-              engine. No waiting, just instant results.
-            </p>
-          </div>
-
-          {/* Feature 2 */}
-          <div className="space-y-4 border bg-card p-6">
-            <div className="flex size-12 items-center justify-center bg-primary/10">
-              <Icon
-                icon="pixelarticons:sliders-2"
-                width={24}
-                height={24}
-                className="text-primary"
-              />
-            </div>
-            <h3 className="font-semibold text-xl">Full Customization</h3>
-            <p className="text-muted-foreground">
-              Adjust pixel size, color palette, and style to match your vision.
-              Complete creative control at your fingertips.
-            </p>
-          </div>
-
-          {/* Feature 3 */}
-          <div className="space-y-4 border bg-card p-6">
-            <div className="flex size-12 items-center justify-center bg-primary/10">
-              <Icon
-                icon="pixelarticons:image"
-                width={24}
-                height={24}
-                className="text-primary"
-              />
-            </div>
-            <h3 className="font-semibold text-xl">High Quality Output</h3>
-            <p className="text-muted-foreground">
-              Export in multiple formats and resolutions. Perfect for games, art
-              projects, or social media.
-            </p>
-          </div>
-
-          {/* Feature 4 */}
-          <div className="space-y-4 border bg-card p-6">
-            <div className="flex size-12 items-center justify-center bg-primary/10">
-              <Icon
-                icon="pixelarticons:lock"
-                width={24}
-                height={24}
-                className="text-primary"
-              />
-            </div>
-            <h3 className="font-semibold text-xl">Privacy First</h3>
-            <p className="text-muted-foreground">
-              Your images are processed locally in your browser. We never upload
-              or store your personal photos.
-            </p>
-          </div>
-
-          {/* Feature 5 */}
-          <div className="space-y-4 border bg-card p-6">
-            <div className="flex size-12 items-center justify-center bg-primary/10">
-              <Icon
-                icon="pixelarticons:device-phone"
-                width={24}
-                height={24}
-                className="text-primary"
-              />
-            </div>
-            <h3 className="font-semibold text-xl">Works Everywhere</h3>
-            <p className="text-muted-foreground">
-              Fully responsive design that works seamlessly on desktop, tablet,
-              and mobile devices.
-            </p>
-          </div>
-
-          {/* Feature 6 */}
-          <div className="space-y-4 border bg-card p-6">
-            <div className="flex size-12 items-center justify-center bg-primary/10">
-              <Icon
-                icon="pixelarticons:heart"
-                width={24}
-                height={24}
-                className="text-primary"
-              />
-            </div>
-            <h3 className="font-semibold text-xl">Free Forever</h3>
-            <p className="text-muted-foreground">
-              No subscriptions, no hidden fees. All features are completely free
-              to use, now and always.
-            </p>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -198,65 +107,23 @@ export default function HomePage() {
 
         {/* Steps */}
         <div className="grid gap-8 lg:grid-cols-3">
-          {/* Step 1 */}
-          <div className="relative space-y-4 text-center">
-            <div className="mx-auto flex size-16 items-center justify-center border-2 border-primary bg-primary/10 font-bold text-2xl text-primary">
-              1
+          {steps.map((step) => (
+            <div key={step.number} className="relative space-y-4 text-center">
+              <div className="mx-auto flex size-16 items-center justify-center border-2 border-primary bg-primary/10 font-bold text-2xl text-primary">
+                {step.number}
+              </div>
+              <h3 className="font-semibold text-xl">{step.title}</h3>
+              <p className="text-muted-foreground">{step.description}</p>
+              <div className="mx-auto mt-6 size-12">
+                <Icon
+                  icon={step.icon}
+                  width={48}
+                  height={48}
+                  className="text-primary"
+                />
+              </div>
             </div>
-            <h3 className="font-semibold text-xl">Upload Your Image</h3>
-            <p className="text-muted-foreground">
-              Drag and drop any image or click to browse from your device.
-              Supports all common image formats.
-            </p>
-            <div className="mx-auto mt-6 size-12">
-              <Icon
-                icon="pixelarticons:upload"
-                width={48}
-                height={48}
-                className="text-primary"
-              />
-            </div>
-          </div>
-
-          {/* Step 2 */}
-          <div className="relative space-y-4 text-center">
-            <div className="mx-auto flex size-16 items-center justify-center border-2 border-primary bg-primary/10 font-bold text-2xl text-primary">
-              2
-            </div>
-            <h3 className="font-semibold text-xl">Customize Style</h3>
-            <p className="text-muted-foreground">
-              Adjust pixel size, colors, and effects. Preview changes in
-              real-time as you tweak settings.
-            </p>
-            <div className="mx-auto mt-6 size-12">
-              <Icon
-                icon="pixelarticons:edit"
-                width={48}
-                height={48}
-                className="text-primary"
-              />
-            </div>
-          </div>
-
-          {/* Step 3 */}
-          <div className="relative space-y-4 text-center">
-            <div className="mx-auto flex size-16 items-center justify-center border-2 border-primary bg-primary/10 font-bold text-2xl text-primary">
-              3
-            </div>
-            <h3 className="font-semibold text-xl">Download & Share</h3>
-            <p className="text-muted-foreground">
-              Export your pixel art in your preferred format and resolution.
-              Ready to use anywhere!
-            </p>
-            <div className="mx-auto mt-6 size-12">
-              <Icon
-                icon="pixelarticons:download"
-                width={48}
-                height={48}
-                className="text-primary"
-              />
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
