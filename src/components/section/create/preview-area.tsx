@@ -5,12 +5,22 @@ import { resetAtom } from "@/atoms/pixel-art";
 import { Button } from "@/components/ui/button";
 import { usePixelArt } from "@/hooks/use-canvas";
 import { useImageUpload } from "@/hooks/use-upload";
+import { useZoom } from "@/hooks/use-zoom";
 
 export function PreviewArea() {
   const { image } = useImageUpload();
   const { pixelatedCanvasRef, isProcessing, loadImage, downloadPixelArt } =
     usePixelArt();
   const resetAll = useSetAtom(resetAtom);
+  const {
+    zoomCanvasRef,
+    containerRef,
+    zoomPosition,
+    isZooming,
+    handleMouseMove,
+    handleMouseEnter,
+    handleMouseLeave,
+  } = useZoom(pixelatedCanvasRef);
 
   // Load and process image when it changes
   useEffect(() => {
@@ -42,12 +52,34 @@ export function PreviewArea() {
       </div>
 
       {/* Pixel Art Preview */}
-      <div className="border bg-muted/20">
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: Mouse events provide optional zoom enhancement */}
+      <div
+        ref={containerRef}
+        className="relative overflow-hidden border bg-muted/20"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+      >
         <canvas
           ref={pixelatedCanvasRef}
-          className="mx-auto w-full max-w-full"
+          className="mx-auto w-full max-w-full cursor-zoom-in"
           style={{ imageRendering: "pixelated" }}
         />
+
+        {/* Circular Zoom Lens */}
+        {isZooming && image && (
+          <canvas
+            ref={zoomCanvasRef}
+            width={150}
+            height={150}
+            className="pointer-events-none absolute"
+            style={{
+              left: zoomPosition.x - 75,
+              top: zoomPosition.y - 75,
+              imageRendering: "pixelated",
+            }}
+          />
+        )}
       </div>
 
       {/* Download Button */}

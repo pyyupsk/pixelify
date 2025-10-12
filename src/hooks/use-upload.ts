@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { useCallback } from "react";
+import { type ChangeEvent, type DragEvent, useCallback } from "react";
 import { imageAtom, isDraggingAtom } from "@/atoms/pixel-art";
 
 export function useImageUpload() {
@@ -7,7 +7,7 @@ export function useImageUpload() {
   const [isDragging, setIsDragging] = useAtom(isDraggingAtom);
 
   const handleDragOver = useCallback(
-    (e: React.DragEvent) => {
+    (e: DragEvent) => {
       e.preventDefault();
       setIsDragging(true);
     },
@@ -15,7 +15,7 @@ export function useImageUpload() {
   );
 
   const handleDragLeave = useCallback(
-    (e: React.DragEvent) => {
+    (e: DragEvent) => {
       e.preventDefault();
       setIsDragging(false);
     },
@@ -23,7 +23,7 @@ export function useImageUpload() {
   );
 
   const handleDrop = useCallback(
-    (e: React.DragEvent) => {
+    (e: DragEvent) => {
       e.preventDefault();
       setIsDragging(false);
 
@@ -40,7 +40,7 @@ export function useImageUpload() {
   );
 
   const handleFileInput = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) {
         const reader = new FileReader();
