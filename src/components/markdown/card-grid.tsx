@@ -22,9 +22,7 @@ export function Card({
       <h3 className="mb-2 font-semibold text-base group-hover:text-primary">
         {title}
       </h3>
-      <p className="text-muted-foreground text-sm leading-relaxed">
-        {children}
-      </p>
+      <div className="text-muted-foreground text-sm">{children}</div>
     </Link>
   );
 }

@@ -1,26 +1,17 @@
 import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
 import { Card, CardGrid } from "@/components/markdown/card-grid";
-import { CodeGroup } from "@/components/markdown/code-group";
-import { Endpoint, EndpointList } from "@/components/markdown/endpoint-list";
-import { ErrorRow, ErrorTable } from "@/components/markdown/error-table";
 import { Feature, FeatureGrid } from "@/components/markdown/feature-grid";
 import { Step, Steps } from "@/components/markdown/steps";
 
 const components: MDXComponents = {
-  // Custom components for documentation
   FeatureGrid,
   Feature,
   Steps,
   Step,
   CardGrid,
   Card,
-  EndpointList,
-  Endpoint,
-  ErrorTable,
-  ErrorRow,
-  CodeGroup,
 
-  // Enhanced default components
   h1: ({ children, ...props }) => (
     <h1
       className="mb-4 font-bold text-3xl tracking-tight md:text-4xl lg:text-5xl"
@@ -75,30 +66,55 @@ const components: MDXComponents = {
       {children}
     </blockquote>
   ),
-  code: ({ children, ...props }) => (
-    <code
-      className="relative border bg-muted px-1.5 py-0.5 font-mono text-sm"
+  code: ({ children, className, ...props }) => {
+    const isCodeBlock =
+      Array.isArray(children) &&
+      children.some(
+        (child) =>
+          typeof child === "object" &&
+          child !== null &&
+          "props" in child &&
+          child.props?.className === "line",
+      );
+
+    if (isCodeBlock) {
+      return (
+        <figure className="my-3 overflow-x-auto rounded-lg border bg-card p-6">
+          <code className="relative font-mono text-sm" {...props}>
+            {children}
+          </code>
+        </figure>
+      );
+    }
+
+    return (
+      <code
+        className="relative rounded border bg-muted px-1.5 py-0.5 font-mono text-sm"
+        {...props}
+      >
+        {children}
+      </code>
+    );
+  },
+  pre: ({ children, ...props }) => (
+    <pre
+      className="my-3 overflow-x-auto rounded-lg border bg-card p-6"
       {...props}
     >
-      {children}
-    </code>
-  ),
-  pre: ({ children, ...props }) => (
-    <pre className="my-6 overflow-x-auto border bg-card p-4" {...props}>
       {children}
     </pre>
   ),
   a: ({ children, href, ...props }) => (
-    <a
+    <Link
       href={href}
       className="font-medium text-primary underline decoration-2 underline-offset-4 transition-colors hover:text-primary/80"
       {...props}
     >
       {children}
-    </a>
+    </Link>
   ),
   table: ({ children, ...props }) => (
-    <div className="my-8 w-full overflow-x-auto">
+    <div className="my-4 w-full overflow-x-auto">
       <table className="w-full border-collapse border" {...props}>
         {children}
       </table>
@@ -106,7 +122,7 @@ const components: MDXComponents = {
   ),
   th: ({ children, ...props }) => (
     <th
-      className="border bg-muted px-4 py-3 text-left font-semibold [&[align=center]]:text-center [&[align=right]]:text-right"
+      className="border bg-muted p-3 text-left font-semibold [&[align=center]]:text-center [&[align=right]]:text-right"
       {...props}
     >
       {children}
@@ -114,13 +130,13 @@ const components: MDXComponents = {
   ),
   td: ({ children, ...props }) => (
     <td
-      className="border px-4 py-3 text-left [&[align=center]]:text-center [&[align=right]]:text-right"
+      className="border p-3 text-left [&[align=center]]:text-center [&[align=right]]:text-right"
       {...props}
     >
       {children}
     </td>
   ),
-  hr: (props) => <hr className="my-12 border-border" {...props} />,
+  hr: (props) => <hr className="my-6 border-border" {...props} />,
   strong: ({ children, ...props }) => (
     <strong className="font-semibold" {...props}>
       {children}
