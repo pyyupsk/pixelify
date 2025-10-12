@@ -14,7 +14,7 @@ import {
   applyColorQuantization,
   calculateScaledDimensions,
   createTempCanvas,
-} from "@/utils/pixel-art";
+} from "@/lib/pixel-art/client";
 
 export function usePixelArt() {
   const pixelSize = useAtomValue(pixelSizeAtom);

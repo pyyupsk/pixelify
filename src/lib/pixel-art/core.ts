@@ -1,23 +1,23 @@
-type DitheringMode = "none" | "floyd-steinberg" | "ordered";
+import type { DitheringMode } from "./schema";
 
 /**
  * Clamp a value between 0 and 255
  */
-function clamp(value: number): number {
+export function clamp(value: number): number {
   return Math.min(255, Math.max(0, value));
 }
 
 /**
  * Distribute Floyd-Steinberg error to a neighboring pixel
  */
-function distributeError(
+export function distributeError(
   data: Uint8ClampedArray,
   idx: number,
   errR: number,
   errG: number,
   errB: number,
   factor: number,
-) {
+): void {
   data[idx] = clamp(data[idx] + errR * factor);
   data[idx + 1] = clamp(data[idx + 1] + errG * factor);
   data[idx + 2] = clamp(data[idx + 2] + errB * factor);
@@ -26,7 +26,7 @@ function distributeError(
 /**
  * Apply Floyd-Steinberg dithering to a pixel
  */
-function applyFloydSteinberg(
+export function applyFloydSteinberg(
   data: Uint8ClampedArray,
   i: number,
   errR: number,
@@ -34,7 +34,7 @@ function applyFloydSteinberg(
   errB: number,
   scaledWidth: number,
   scaledHeight: number,
-) {
+): void {
   const x = (i / 4) % scaledWidth;
   const y = Math.floor(i / 4 / scaledWidth);
 
@@ -62,13 +62,13 @@ function applyFloydSteinberg(
 /**
  * Apply ordered (Bayer) dithering to a pixel
  */
-function applyOrderedDithering(
+export function applyOrderedDithering(
   data: Uint8ClampedArray,
   i: number,
   original: { r: number; g: number; b: number },
   quantized: { r: number; g: number; b: number },
   scaledWidth: number,
-) {
+): void {
   const x = (i / 4) % scaledWidth;
   const y = Math.floor(i / 4 / scaledWidth);
   const threshold = [
@@ -87,7 +87,11 @@ function applyOrderedDithering(
 /**
  * Convert RGB to HSL
  */
-function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
+export function rgbToHsl(
+  r: number,
+  g: number,
+  b: number,
+): [number, number, number] {
   r /= 255;
   g /= 255;
   b /= 255;
@@ -121,7 +125,11 @@ function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
 /**
  * Convert HSL to RGB
  */
-function hslToRgb(h: number, s: number, l: number): [number, number, number] {
+export function hslToRgb(
+  h: number,
+  s: number,
+  l: number,
+): [number, number, number] {
   let r: number;
   let g: number;
   let b: number;
@@ -150,16 +158,14 @@ function hslToRgb(h: number, s: number, l: number): [number, number, number] {
 }
 
 /**
- * Apply color adjustments (brightness, contrast, saturation) to image data
+ * Apply color adjustments to image data (brightness, contrast, saturation)
  */
-export function applyColorAdjustments(
-  imageData: ImageData,
+export function applyColorAdjustmentsToData(
+  data: Uint8ClampedArray,
   brightness: number,
   contrast: number,
   saturation: number,
 ): void {
-  const data = imageData.data;
-
   // Normalize values from -100/100 to usable ranges
   const brightnessFactor = brightness / 100;
   const contrastFactor = (contrast + 100) / 100;
@@ -197,16 +203,15 @@ export function applyColorAdjustments(
 /**
  * Apply color quantization and dithering to image data
  */
-export function applyColorQuantization(
-  imageData: ImageData,
+export function applyColorQuantizationToData(
+  data: Uint8ClampedArray,
   colorDepth: number,
   dithering: DitheringMode,
-  scaledWidth: number,
-  scaledHeight: number,
+  width: number,
+  height: number,
 ): void {
   if (colorDepth >= 256) return;
 
-  const data = imageData.data;
   const levels = colorDepth;
   const step = 255 / (levels - 1);
 
@@ -226,14 +231,14 @@ export function applyColorQuantization(
       const errG = g - qg;
       const errB = b - qb;
 
-      applyFloydSteinberg(data, i, errR, errG, errB, scaledWidth, scaledHeight);
+      applyFloydSteinberg(data, i, errR, errG, errB, width, height);
     } else if (dithering === "ordered") {
       applyOrderedDithering(
         data,
         i,
         { r, g, b },
         { r: qr, g: qg, b: qb },
-        scaledWidth,
+        width,
       );
     } else {
       data[i] = qr;
@@ -241,37 +246,4 @@ export function applyColorQuantization(
       data[i + 2] = qb;
     }
   }
-}
-
-/**
- * Calculate scaled dimensions for canvas
- */
-export function calculateScaledDimensions(
-  sourceWidth: number,
-  sourceHeight: number,
-  maxSize = 800,
-): { width: number; height: number; scale: number } {
-  const scale = Math.min(maxSize / sourceWidth, maxSize / sourceHeight, 1);
-  const width = Math.floor(sourceWidth * scale);
-  const height = Math.floor(sourceHeight * scale);
-
-  return { width, height, scale };
-}
-
-/**
- * Create and configure a temporary canvas for image processing
- */
-export function createTempCanvas(
-  width: number,
-  height: number,
-): { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D } | null {
-  const canvas = document.createElement("canvas");
-  canvas.width = width;
-  canvas.height = height;
-
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) return null;
-
-  ctx.imageSmoothingEnabled = false;
-  return { canvas, ctx };
 }

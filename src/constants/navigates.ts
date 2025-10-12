@@ -21,8 +21,8 @@ export const navigates: NavigationItem[] = [
     icon: "pixelarticons:image-gallery",
   },
   {
-    href: "/about",
-    label: "About",
-    icon: "pixelarticons:info-box",
+    href: "/docs",
+    label: "Documentation",
+    icon: "pixelarticons:book",
   },
 ];

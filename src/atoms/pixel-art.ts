@@ -1,7 +1,5 @@
 import { atom } from "jotai";
-
-export type ColorDepth = 8 | 16 | 32 | 256;
-export type DitheringMode = "none" | "floyd-steinberg" | "ordered";
+import type { ColorDepth, DitheringMode } from "@/lib/pixel-art/schema";
 
 // Settings atoms
 export const pixelSizeAtom = atom(8);

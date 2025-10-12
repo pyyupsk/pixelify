@@ -1,7 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
 import {
   brightnessAtom,
-  type ColorDepth,
   colorDepthAtom,
   contrastAtom,
   ditheringAtom,
@@ -11,6 +10,7 @@ import {
 } from "@/atoms/pixel-art";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import type { ColorDepth } from "@/lib/pixel-art/schema";
 
 export function SettingsPanel() {
   const [pixelSize, setPixelSize] = useAtom(pixelSizeAtom);

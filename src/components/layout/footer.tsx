@@ -9,9 +9,9 @@ export function Footer() {
   return (
     <footer className="border-t bg-background">
       <div className="container py-12 md:py-16">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-3">
           {/* Brand Section */}
-          <div className="space-y-4">
+          <div className="col-span-2 space-y-4 md:col-span-1">
             <Link
               href="/"
               className="flex items-center gap-2 font-bold text-xl"
@@ -40,41 +40,6 @@ export function Footer() {
                   {item.label}
                 </Link>
               ))}
-            </nav>
-          </div>
-
-          {/* Resources */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-sm">Resources</h3>
-            <nav className="flex flex-col gap-3">
-              <Link
-                href="/docs"
-                className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-                aria-label="Documentation"
-              >
-                Documentation
-              </Link>
-              <Link
-                href="/faq"
-                className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-                aria-label="FAQ"
-              >
-                FAQ
-              </Link>
-              <Link
-                href="/blog"
-                className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-                aria-label="Blog"
-              >
-                Blog
-              </Link>
-              <Link
-                href="/api"
-                className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-                aria-label="API"
-              >
-                API
-              </Link>
             </nav>
           </div>
 
