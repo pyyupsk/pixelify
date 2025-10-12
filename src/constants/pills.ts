@@ -1,4 +1,4 @@
-export type Pill = {
+type Pill = {
   icon: string;
   label: string;
 };

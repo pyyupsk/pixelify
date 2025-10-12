@@ -1,16 +1,6 @@
 import { z } from "zod";
 
 /**
- * Color depth enum
- */
-export const colorDepthEnum = z.enum(["8", "16", "32", "256"]);
-
-/**
- * Dithering mode enum
- */
-export const ditheringEnum = z.enum(["none", "floyd-steinberg", "ordered"]);
-
-/**
  * Pixel art options schema for query parameters (GET request)
  */
 export const pixelArtQuerySchema = z.object({
@@ -27,11 +17,15 @@ export const pixelArtQuerySchema = z.object({
         .min(1, { message: "pixelSize must be at least 1" })
         .max(100, { message: "pixelSize must be at most 100" }),
     ),
-  colorDepth: colorDepthEnum
+  colorDepth: z
+    .enum(["8", "16", "32", "256"])
     .optional()
     .default("32")
     .transform((val) => Number.parseInt(val, 10) as 8 | 16 | 32 | 256),
-  dithering: ditheringEnum.optional().default("none"),
+  dithering: z
+    .enum(["none", "floyd-steinberg", "ordered"])
+    .optional()
+    .default("none"),
   brightness: z
     .string()
     .optional()
@@ -85,7 +79,7 @@ export const pixelArtQuerySchema = z.object({
 /**
  * Pixel art options schema for request body (POST request)
  */
-export const pixelArtOptionsSchema = z.object({
+const pixelArtOptionsSchema = z.object({
   pixelSize: z
     .number()
     .int()
@@ -151,9 +145,7 @@ export const postRequestSchema = z.object({
 });
 
 // Type exports
-export type PixelArtQuery = z.infer<typeof pixelArtQuerySchema>;
 export type PixelArtOptions = z.infer<typeof pixelArtOptionsSchema>;
-export type PostRequest = z.infer<typeof postRequestSchema>;
 
 export type ColorDepth = 8 | 16 | 32 | 256;
 export type DitheringMode = "none" | "floyd-steinberg" | "ordered";

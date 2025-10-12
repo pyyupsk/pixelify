@@ -3,14 +3,14 @@ import type { DitheringMode } from "./schema";
 /**
  * Clamp a value between 0 and 255
  */
-export function clamp(value: number): number {
+function clamp(value: number): number {
   return Math.min(255, Math.max(0, value));
 }
 
 /**
  * Distribute Floyd-Steinberg error to a neighboring pixel
  */
-export function distributeError(
+function distributeError(
   data: Uint8ClampedArray,
   idx: number,
   errR: number,
@@ -26,7 +26,7 @@ export function distributeError(
 /**
  * Apply Floyd-Steinberg dithering to a pixel
  */
-export function applyFloydSteinberg(
+function applyFloydSteinberg(
   data: Uint8ClampedArray,
   i: number,
   errR: number,
@@ -62,7 +62,7 @@ export function applyFloydSteinberg(
 /**
  * Apply ordered (Bayer) dithering to a pixel
  */
-export function applyOrderedDithering(
+function applyOrderedDithering(
   data: Uint8ClampedArray,
   i: number,
   original: { r: number; g: number; b: number },
@@ -87,11 +87,7 @@ export function applyOrderedDithering(
 /**
  * Convert RGB to HSL
  */
-export function rgbToHsl(
-  r: number,
-  g: number,
-  b: number,
-): [number, number, number] {
+function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
   r /= 255;
   g /= 255;
   b /= 255;
@@ -125,11 +121,7 @@ export function rgbToHsl(
 /**
  * Convert HSL to RGB
  */
-export function hslToRgb(
-  h: number,
-  s: number,
-  l: number,
-): [number, number, number] {
+function hslToRgb(h: number, s: number, l: number): [number, number, number] {
   let r: number;
   let g: number;
   let b: number;
