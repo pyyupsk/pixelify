@@ -20,6 +20,20 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
+  images: {
+    localPatterns: [
+      {
+        pathname: "/api/pixelart/**",
+      },
+    ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 export default withMDX(nextConfig);
