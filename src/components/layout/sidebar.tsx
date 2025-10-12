@@ -12,75 +12,43 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 
-const sidebar = [
+const sidebars = [
   {
     title: "Getting Started",
     url: "#",
     items: [
       {
-        title: "Installation",
-        url: "#",
+        title: "Introduction",
+        url: "/docs",
       },
       {
-        title: "Project Structure",
-        url: "#",
+        title: "Quick Start",
+        url: "/docs/quick-start",
       },
     ],
   },
   {
-    title: "Building Your Application",
+    title: "Features",
     url: "#",
     items: [
       {
-        title: "Routing",
-        url: "#",
+        title: "Pixel Art Conversion",
+        url: "/docs/features/pixel-art",
       },
       {
-        title: "Data Fetching",
-        url: "#",
-        isActive: true,
+        title: "Color Adjustments",
+        url: "/docs/features/color-adjustments",
       },
       {
-        title: "Rendering",
-        url: "#",
+        title: "Dithering Effects",
+        url: "/docs/features/dithering",
       },
       {
-        title: "Caching",
-        url: "#",
-      },
-      {
-        title: "Styling",
-        url: "#",
-      },
-      {
-        title: "Optimizing",
-        url: "#",
-      },
-      {
-        title: "Configuring",
-        url: "#",
-      },
-      {
-        title: "Testing",
-        url: "#",
-      },
-      {
-        title: "Authentication",
-        url: "#",
-      },
-      {
-        title: "Deploying",
-        url: "#",
-      },
-      {
-        title: "Upgrading",
-        url: "#",
-      },
-      {
-        title: "Examples",
-        url: "#",
+        title: "Export Options",
+        url: "/docs/features/export",
       },
     ],
   },
@@ -89,54 +57,46 @@ const sidebar = [
     url: "#",
     items: [
       {
-        title: "Components",
-        url: "#",
+        title: "Overview",
+        url: "/docs/api/overview",
       },
       {
-        title: "File Conventions",
-        url: "#",
+        title: "POST /api/pixelart",
+        url: "/docs/api/post",
       },
       {
-        title: "Functions",
-        url: "#",
+        title: "GET /api/pixelart",
+        url: "/docs/api/get",
       },
       {
-        title: "next.config.js Options",
-        url: "#",
+        title: "Parameters",
+        url: "/docs/api/parameters",
       },
       {
-        title: "CLI",
-        url: "#",
-      },
-      {
-        title: "Edge Runtime",
-        url: "#",
+        title: "Examples",
+        url: "/docs/api/examples",
       },
     ],
   },
   {
-    title: "Architecture",
+    title: "Advanced",
     url: "#",
     items: [
       {
-        title: "Accessibility",
-        url: "#",
+        title: "Client-Side Processing",
+        url: "/docs/advanced/client-side",
       },
       {
-        title: "Fast Refresh",
-        url: "#",
+        title: "Server-Side Processing",
+        url: "/docs/advanced/server-side",
       },
       {
-        title: "Next.js Compiler",
-        url: "#",
+        title: "Performance",
+        url: "/docs/advanced/performance",
       },
       {
-        title: "Supported Browsers",
-        url: "#",
-      },
-      {
-        title: "Turbopack",
-        url: "#",
+        title: "Best Practices",
+        url: "/docs/advanced/best-practices",
       },
     ],
   },
@@ -154,17 +114,18 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
           <Logo size={32} />
           Pixelify
         </Link>
+        <SidebarTrigger className="-right-[44.9px] absolute top-4" />
       </SidebarHeader>
       <SidebarContent>
-        {sidebar.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+        {sidebars.map((sidebar) => (
+          <SidebarGroup key={sidebar.title}>
+            <SidebarGroupLabel>{sidebar.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
+                {sidebar.items.map((subItem) => (
+                  <SidebarMenuItem key={subItem.title}>
+                    <SidebarMenuButton asChild>
+                      <Link href={subItem.url}>{subItem.title}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}

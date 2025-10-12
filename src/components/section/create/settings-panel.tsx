@@ -25,7 +25,7 @@ export function SettingsPanel() {
 
   return (
     <div className="space-y-4">
-      <h3 className="font-semibold text-lg">Settings</h3>
+      <h3 className="font-semibold text-xl">Settings</h3>
       <div className="space-y-6">
         {/* Pixel Size */}
         <div className="flex flex-col space-y-3">

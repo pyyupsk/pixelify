@@ -22,7 +22,7 @@ export function PreviewArea() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-lg">
+        <h3 className="font-semibold text-xl">
           Preview{" "}
           {isProcessing && (
             <span className="text-muted-foreground">(Processing...)</span>

@@ -1,0 +1,89 @@
+# Welcome to Pixelify Documentation
+
+Pixelify is a powerful pixel art converter that transforms your images into retro-style pixel art. Whether you're creating game assets, nostalgic artwork, or just experimenting with different visual styles, Pixelify provides the tools you need.
+
+## Features
+
+<FeatureGrid>
+  <Feature title="Instant Conversion" icon="pixelarticons:image">
+    Convert any image to pixel art instantly in your browser. No uploads required - all processing happens locally.
+  </Feature>
+  <Feature title="Advanced Controls" icon="pixelarticons:sliders">
+    Fine-tune your pixel art with controls for pixel size, color depth, dithering, brightness, contrast, and saturation.
+  </Feature>
+  <Feature title="Multiple Export Formats" icon="pixelarticons:download">
+    Export your creations in PNG format, ready to use in your projects.
+  </Feature>
+  <Feature title="API Access" icon="pixelarticons:code">
+    Integrate pixel art conversion into your applications with our easy-to-use REST API.
+  </Feature>
+</FeatureGrid>
+
+## Quick Start
+
+Get started with Pixelify in seconds:
+
+<Steps>
+  <Step>
+    ### Upload Your Image
+    Click the upload area or drag and drop any image file (PNG, JPG, WebP).
+  </Step>
+  <Step>
+    ### Adjust Settings
+    Use the settings panel to customize pixel size, color depth, and apply effects.
+  </Step>
+  <Step>
+    ### Export Result
+    Download your pixel art creation with a single click.
+  </Step>
+</Steps>
+
+## How It Works
+
+Pixelify uses advanced image processing algorithms to:
+
+1. **Downscale** your image to create the pixelated effect
+2. **Quantize** colors to match retro color palettes
+3. **Apply dithering** for smooth color transitions (optional)
+4. **Adjust** brightness, contrast, and saturation for the perfect look
+
+All processing happens directly in your browser using HTML5 Canvas API, ensuring privacy and speed.
+
+## Key Concepts
+
+### Pixel Size
+
+Controls how large each "pixel" in the output image will be. Larger values create a more pronounced pixelated effect.
+
+- **Recommended range**: 4-16 for detailed images, 8-32 for bold, retro looks
+
+### Color Depth
+
+Determines how many colors are available in the final image:
+
+- **8 colors**: Extreme retro, limited palette
+- **16 colors**: Classic 16-bit style
+- **32 colors**: Balanced retro look with good detail
+- **256 colors**: Rich palette with subtle pixelation
+
+### Dithering
+
+A technique to create the illusion of more colors by mixing available colors:
+
+- **None**: Clean, solid colors
+- **Floyd-Steinberg**: Natural-looking gradients
+- **Ordered (Bayer)**: Patterned, textured look
+
+## Next Steps
+
+<CardGrid>
+  <Card title="Quick Start Guide" href="/docs/quick-start">
+    Learn how to create your first pixel art in minutes.
+  </Card>
+  <Card title="API Reference" href="/docs/api/overview">
+    Integrate Pixelify into your applications.
+  </Card>
+  <Card title="Best Practices" href="/docs/advanced/best-practices">
+    Tips and tricks for creating amazing pixel art.
+  </Card>
+</CardGrid>
