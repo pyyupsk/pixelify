@@ -2,6 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,7 @@ export function ExampleCard({
   const [imageError, setImageError] = useState(false);
 
   const pixelArtUrl = `/api/pixelart?url=${encodeURIComponent(originalUrl)}&pixelSize=${settings.pixelSize}&colorDepth=${settings.colorDepth}&dithering=${settings.dithering}`;
+  const createPageUrl = `/create?pixelSize=${settings.pixelSize}&colorDepth=${settings.colorDepth}&dithering=${settings.dithering}`;
 
   return (
     <div className="group space-y-4 border bg-card">
@@ -125,16 +127,11 @@ export function ExampleCard({
           </div>
         </div>
 
-        <Button
-          size="sm"
-          className="w-full"
-          onClick={() => {
-            // TODO: Implement "Try These Settings" functionality
-            console.log("Try these settings:", settings);
-          }}
-        >
-          <Icon icon="pixelarticons:copy" width={14} height={14} />
-          Try These Settings
+        <Button size="sm" className="w-full" asChild>
+          <Link href={createPageUrl} aria-label={`Try settings from ${title}`}>
+            <Icon icon="pixelarticons:copy" width={14} height={14} />
+            Try These Settings
+          </Link>
         </Button>
       </div>
     </div>
