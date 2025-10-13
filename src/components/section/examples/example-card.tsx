@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type Props = {
   title: string;
@@ -47,9 +48,10 @@ export function ExampleCard({
               src={`${originalUrl}?w=600&h=600&fit=crop`}
               alt={title}
               fill
-              className={`object-cover transition-opacity duration-300 ${
-                isHovered ? "opacity-0" : "opacity-100"
-              }`}
+              className={cn(
+                "object-cover transition-opacity duration-300",
+                isHovered ? "opacity-0" : "opacity-100",
+              )}
               onError={() => setImageError(true)}
               loading="lazy"
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -59,9 +61,10 @@ export function ExampleCard({
               src={pixelArtUrl}
               alt={`${title} - Pixel Art`}
               fill
-              className={`object-cover transition-opacity duration-300 ${
-                isHovered ? "opacity-100" : "opacity-0"
-              }`}
+              className={cn(
+                "object-cover transition-opacity duration-300",
+                isHovered ? "opacity-100" : "opacity-0",
+              )}
               style={{ imageRendering: "pixelated" }}
               loading="lazy"
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -69,9 +72,10 @@ export function ExampleCard({
             />
             {/* Hover Indicator */}
             <div
-              className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 transition-opacity duration-300 ${
-                isHovered ? "opacity-100" : "opacity-0"
-              }`}
+              className={cn(
+                "absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 transition-opacity duration-300",
+                isHovered ? "opacity-100" : "opacity-0",
+              )}
             >
               <p className="text-center text-white text-xs">
                 Pixel Art Version

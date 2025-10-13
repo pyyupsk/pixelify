@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useImageUpload } from "@/hooks/use-upload";
+import { cn } from "@/lib/utils";
 
 export function UploadArea() {
   const {
@@ -16,11 +17,12 @@ export function UploadArea() {
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className={`flex min-h-[400px] cursor-pointer flex-col items-center justify-center border-2 border-dashed bg-muted/20 p-12 transition-colors ${
+      className={cn(
+        "flex min-h-[400px] cursor-pointer flex-col items-center justify-center border-2 border-dashed bg-muted/20 p-12 transition-colors",
         isDragging
           ? "border-primary bg-primary/5"
-          : "border-muted-foreground/25"
-      }`}
+          : "border-muted-foreground/25",
+      )}
     >
       <div className="space-y-6 text-center">
         <div className="mx-auto flex size-20 items-center justify-center bg-primary/10">

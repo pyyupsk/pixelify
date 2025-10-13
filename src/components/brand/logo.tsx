@@ -1,5 +1,7 @@
 import "./logo.css";
 
+import { cn } from "@/lib/utils";
+
 type Props = {
   size?: number;
   animated?: boolean;
@@ -18,7 +20,7 @@ export function Logo({
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`gamepad-logo ${animated ? "animated" : ""} ${className}`}
+      className={cn("gamepad-logo", animated && "animated", className)}
     >
       <title>Gamepad</title>
       {/* Main body */}
