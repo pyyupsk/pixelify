@@ -1,5 +1,4 @@
-import { Icon } from "@iconify/react";
-import type { PropsWithChildren } from "react";
+import type { ComponentType, PropsWithChildren, SVGProps } from "react";
 
 export function FeatureGrid({ children }: Readonly<PropsWithChildren>) {
   return <div className="my-6 grid gap-4 lg:grid-cols-2">{children}</div>;
@@ -7,14 +6,19 @@ export function FeatureGrid({ children }: Readonly<PropsWithChildren>) {
 
 export function Feature({
   title,
-  icon,
+  icon: IconComponent,
   children,
-}: Readonly<PropsWithChildren<{ title: string; icon?: string }>>) {
+}: Readonly<
+  PropsWithChildren<{
+    title: string;
+    icon?: ComponentType<SVGProps<SVGSVGElement>>;
+  }>
+>) {
   return (
     <div className="space-y-4 border bg-card p-6">
-      {icon && (
+      {IconComponent && (
         <div className="flex size-12 items-center justify-center bg-primary/10">
-          <Icon icon={icon} width={24} height={24} className="text-primary" />
+          <IconComponent width={24} height={24} className="text-primary" />
         </div>
       )}
       <h3 className="font-semibold text-xl">{title}</h3>

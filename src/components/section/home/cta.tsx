@@ -1,5 +1,5 @@
-import { Icon } from "@iconify/react";
 import Link from "next/link";
+import { ImageGallery, Zap } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
 export function Cta() {
@@ -17,17 +17,13 @@ export function Cta() {
           <div className="flex flex-col gap-4 pt-6 sm:flex-row sm:justify-center">
             <Button size="lg" asChild>
               <Link href="/create" aria-label="Get Started Free">
-                <Icon icon="pixelarticons:sparkles" width={20} height={20} />
+                <Zap width={20} height={20} />
                 Get Started Free
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <Link href="/examples" aria-label="Browse Examples">
-                <Icon
-                  icon="pixelarticons:image-gallery"
-                  width={20}
-                  height={20}
-                />
+                <ImageGallery width={20} height={20} />
                 Browse Examples
               </Link>
             </Button>

@@ -1,9 +1,15 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import {
+  Copy,
+  Grid,
+  ImageBroken,
+  PaintBucket,
+  Sliders,
+} from "@/components/icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -86,8 +92,7 @@ export function ExampleCard({
           </>
         ) : (
           <div className="flex size-full items-center justify-center">
-            <Icon
-              icon="pixelarticons:image-x"
+            <ImageBroken
               width={48}
               height={48}
               className="text-muted-foreground"
@@ -110,15 +115,15 @@ export function ExampleCard({
 
         <div className="flex flex-wrap gap-2 text-xs">
           <div className="flex items-center gap-1 bg-muted/50 px-2 py-1">
-            <Icon icon="pixelarticons:grid" width={12} height={12} />
+            <Grid width={12} height={12} />
             <span>{settings.pixelSize}px</span>
           </div>
           <div className="flex items-center gap-1 bg-muted/50 px-2 py-1">
-            <Icon icon="pixelarticons:paintbrush" width={12} height={12} />
+            <PaintBucket width={12} height={12} />
             <span>{settings.colorDepth}-bit</span>
           </div>
           <div className="flex items-center gap-1 bg-muted/50 px-2 py-1">
-            <Icon icon="pixelarticons:sliders" width={12} height={12} />
+            <Sliders width={12} height={12} />
             <span className="capitalize">
               {settings.dithering === "floyd-steinberg"
                 ? "F-S"
@@ -129,7 +134,7 @@ export function ExampleCard({
 
         <Button size="sm" className="w-full" asChild>
           <Link href={createPageUrl} aria-label={`Try settings from ${title}`}>
-            <Icon icon="pixelarticons:copy" width={14} height={14} />
+            <Copy width={14} height={14} />
             Try These Settings
           </Link>
         </Button>

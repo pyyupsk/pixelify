@@ -1,7 +1,7 @@
-import { Icon } from "@iconify/react";
 import { useSetAtom } from "jotai";
 import { useEffect } from "react";
 import { resetAtom } from "@/atoms/pixel-art";
+import { Close, Download } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { usePixelArt } from "@/hooks/use-canvas";
 import { useImageUpload } from "@/hooks/use-upload";
@@ -46,7 +46,7 @@ export function PreviewArea() {
           aria-label="Reset image"
           className="flex items-center gap-2 text-muted-foreground"
         >
-          <Icon icon="pixelarticons:close" width={16} height={16} />
+          <Close width={16} height={16} />
           <span className="text-sm">Reset</span>
         </button>
       </div>
@@ -90,7 +90,7 @@ export function PreviewArea() {
         aria-label="Download pixel art"
         className="w-full"
       >
-        <Icon icon="pixelarticons:download" width={16} height={16} />
+        <Download width={16} height={16} />
         Download
       </Button>
     </div>

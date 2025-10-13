@@ -1,9 +1,7 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-
 import {
   type ComponentProps,
   type CSSProperties,
@@ -14,6 +12,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { LayoutSidebarLeft } from "@/components/icons";
 import type { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -281,7 +280,7 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <Icon icon="pixelarticons:layout-sidebar-left" width={24} height={24} />
+      <LayoutSidebarLeft width={24} height={24} />
       <span className="sr-only">Toggle Sidebar</span>
     </button>
   );

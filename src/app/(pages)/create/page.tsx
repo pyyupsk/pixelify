@@ -1,9 +1,9 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import { useAtomValue } from "jotai";
 import { Suspense } from "react";
 import { imageAtom } from "@/atoms/pixel-art";
+import { Close, Grid, PaintBucket, Sliders, Zap } from "@/components/icons";
 import { PreviewArea } from "@/components/section/create/preview-area";
 import { SettingsPanel } from "@/components/section/create/settings-panel";
 import { UploadArea } from "@/components/section/create/upload-area";
@@ -29,7 +29,7 @@ function CreatePageContent() {
       {/* Preset Settings Alert */}
       {showPresetAlert && (
         <Alert variant="info" className="mx-auto max-w-3xl">
-          <Icon icon="pixelarticons:sparkles" width={20} height={20} />
+          <Zap width={20} height={20} />
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
               <AlertTitle>Preset Settings Applied</AlertTitle>
@@ -41,19 +41,13 @@ function CreatePageContent() {
                 <div className="flex flex-wrap gap-2 text-xs">
                   {presetDetails.pixelSize && (
                     <span className="bg-primary/10 px-2 py-1">
-                      <Icon
-                        icon="pixelarticons:grid"
-                        width={12}
-                        height={12}
-                        className="mr-1 inline"
-                      />
+                      <Grid width={12} height={12} className="mr-1 inline" />
                       {presetDetails.pixelSize}
                     </span>
                   )}
                   {presetDetails.colorDepth && (
                     <span className="bg-primary/10 px-2 py-1">
-                      <Icon
-                        icon="pixelarticons:paintbrush"
+                      <PaintBucket
                         width={12}
                         height={12}
                         className="mr-1 inline"
@@ -63,12 +57,7 @@ function CreatePageContent() {
                   )}
                   {presetDetails.dithering && (
                     <span className="bg-primary/10 px-2 py-1">
-                      <Icon
-                        icon="pixelarticons:sliders"
-                        width={12}
-                        height={12}
-                        className="mr-1 inline"
-                      />
+                      <Sliders width={12} height={12} className="mr-1 inline" />
                       {presetDetails.dithering}
                     </span>
                   )}
@@ -81,7 +70,7 @@ function CreatePageContent() {
               className="text-muted-foreground transition-colors hover:text-foreground"
               aria-label="Dismiss preset notification"
             >
-              <Icon icon="pixelarticons:close" width={16} height={16} />
+              <Close width={16} height={16} />
             </button>
           </div>
         </Alert>

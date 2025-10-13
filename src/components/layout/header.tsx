@@ -1,6 +1,6 @@
-import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
+import { Menu, Zap } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -44,7 +44,7 @@ export function Header() {
         <div className="flex items-center gap-4">
           <Button asChild className="hidden sm:flex">
             <Link href="/create" aria-label="Get Started">
-              <Icon icon="pixelarticons:sparkles" width={16} height={16} />
+              <Zap width={16} height={16} />
               Get Started
             </Link>
           </Button>
@@ -53,7 +53,7 @@ export function Header() {
           <Sheet>
             <SheetTrigger asChild>
               <div className="md:hidden">
-                <Icon icon="pixelarticons:menu" width={24} height={24} />
+                <Menu width={24} height={24} />
                 <span className="sr-only">Toggle menu</span>
               </div>
             </SheetTrigger>
@@ -68,22 +68,25 @@ export function Header() {
                 </SheetDescription>
               </SheetHeader>
               <nav className="flex flex-col gap-4">
-                {navigates.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                    aria-label={item.label}
-                  >
-                    <Icon icon={item.icon} width={20} height={20} />
-                    {item.label}
-                  </Link>
-                ))}
+                {navigates.map((item) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                      aria-label={item.label}
+                    >
+                      <IconComponent width={20} height={20} />
+                      {item.label}
+                    </Link>
+                  );
+                })}
               </nav>
               <div className="mt-4 flex justify-center px-3">
                 <Button asChild className="w-full">
                   <Link href="/create" aria-label="Get Started">
-                    <Icon icon="pixelarticons:zap" width={16} height={16} />
+                    <Zap width={16} height={16} />
                     Get Started
                   </Link>
                 </Button>

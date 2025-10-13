@@ -1,6 +1,6 @@
-import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
+import { Heart } from "@/components/icons";
 import { contacts } from "@/constants/contats";
 import { legal } from "@/constants/legal";
 import { navigates } from "@/constants/navigates";
@@ -29,7 +29,7 @@ export function Footer() {
 
             <div className="flex gap-4">
               {contacts.map((item) => {
-                const ContactIcon = item.icon;
+                const IconComponent = item.icon;
                 return (
                   <Link
                     key={item.href}
@@ -37,7 +37,7 @@ export function Footer() {
                     className="text-foreground transition-colors hover:text-foreground/80"
                     aria-label={item.label}
                   >
-                    <ContactIcon width={24} height={24} />
+                    <IconComponent width={24} height={24} />
                   </Link>
                 );
               })}
@@ -87,12 +87,7 @@ export function Footer() {
           </p>
           <p className="flex items-center gap-2">
             Made with
-            <Icon
-              icon="pixelarticons:heart"
-              width={16}
-              height={16}
-              className="text-red-500"
-            />
+            <Heart width={16} height={16} className="text-red-500" />
             for pixel art lovers
           </p>
         </div>

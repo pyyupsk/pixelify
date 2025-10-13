@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import { features } from "@/constants/features";
 
 export function Features() {
@@ -16,20 +15,22 @@ export function Features() {
 
       {/* Feature Grid */}
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <div key={feature.title} className="space-y-4 border bg-card p-6">
-            <div className="flex size-12 items-center justify-center bg-primary/10">
-              <Icon
-                icon={feature.icon}
-                width={24}
-                height={24}
-                className="text-primary"
-              />
+        {features.map((feature) => {
+          const IconComponent = feature.icon;
+          return (
+            <div key={feature.title} className="space-y-4 border bg-card p-6">
+              <div className="flex size-12 items-center justify-center bg-primary/10">
+                <IconComponent
+                  width={24}
+                  height={24}
+                  className="text-primary"
+                />
+              </div>
+              <h3 className="font-semibold text-xl">{feature.title}</h3>
+              <p className="text-muted-foreground">{feature.description}</p>
             </div>
-            <h3 className="font-semibold text-xl">{feature.title}</h3>
-            <p className="text-muted-foreground">{feature.description}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

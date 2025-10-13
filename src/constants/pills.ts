@@ -1,23 +1,26 @@
+import type { ComponentType, SVGProps } from "react";
+import { Coin, Download, PaintBucket, Zap } from "@/components/icons";
+
 type Pill = {
-  icon: string;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
   label: string;
 };
 
 export const pills: Pill[] = [
   {
-    icon: "pixelarticons:zap",
+    icon: Zap,
     label: "Instant Processing",
   },
   {
-    icon: "pixelarticons:paint-bucket",
+    icon: PaintBucket,
     label: "Multiple Styles",
   },
   {
-    icon: "pixelarticons:download",
+    icon: Download,
     label: "Easy Download",
   },
   {
-    icon: "pixelarticons:coin",
+    icon: Coin,
     label: "Free to Use",
   },
 ];

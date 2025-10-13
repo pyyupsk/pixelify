@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -49,15 +48,18 @@ export function Hero() {
 
         {/* Feature Pills */}
         <div className="flex flex-wrap justify-center gap-3 pt-8">
-          {pills.map((pill) => (
-            <div
-              key={pill.label}
-              className="flex items-center gap-2 px-3 text-sm"
-            >
-              <Icon icon={pill.icon} width={16} height={16} />
-              {pill.label}
-            </div>
-          ))}
+          {pills.map((pill) => {
+            const IconComponent = pill.icon;
+            return (
+              <div
+                key={pill.label}
+                className="flex items-center gap-2 px-3 text-sm"
+              >
+                <IconComponent width={16} height={16} />
+                {pill.label}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

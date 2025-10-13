@@ -1,6 +1,6 @@
-import { Icon } from "@iconify/react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ExternalLink } from "@/components/icons";
 import { JsonLd } from "@/components/layout/json-ld";
 import { Button } from "@/components/ui/button";
 import { getSiteUrl } from "@/env";
@@ -70,11 +70,7 @@ export default function LicensePage() {
                 rel="noopener noreferrer"
                 aria-label="View Pixelify on GitHub"
               >
-                <Icon
-                  icon="pixelarticons:external-link"
-                  width={16}
-                  height={16}
-                />
+                <ExternalLink width={16} height={16} />
                 GitHub Repository
               </Link>
             </Button>

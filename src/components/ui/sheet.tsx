@@ -1,8 +1,8 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import type { ComponentProps } from "react";
+import { Close } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
 function Sheet({
@@ -72,7 +72,7 @@ function SheetContent({
       >
         {children}
         <SheetPrimitive.Close className="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-          <Icon icon="pixelarticons:close" width={16} height={16} />
+          <Close width={16} height={16} />
           <span className="sr-only">Close</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>

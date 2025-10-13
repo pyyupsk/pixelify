@@ -1,8 +1,8 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { useState } from "react";
+import { Grid, ImageBroken, InfoBox, Zap } from "@/components/icons";
 import { ExampleCard } from "@/components/section/examples/example-card";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -31,12 +31,7 @@ export default function ExamplesPage() {
       {/* Category Filter */}
       <div className="flex flex-col items-center space-y-4">
         <div className="flex items-center gap-2">
-          <Icon
-            icon="pixelarticons:filter"
-            width={20}
-            height={20}
-            className="text-muted-foreground"
-          />
+          <Grid width={20} height={20} className="text-muted-foreground" />
           <span className="font-medium text-sm">Filter by Category</span>
         </div>
         <RadioGroup
@@ -62,12 +57,7 @@ export default function ExamplesPage() {
 
       {/* Info Banner */}
       <div className="mx-auto flex max-w-2xl items-center gap-4 border border-primary/20 bg-primary/5 p-4">
-        <Icon
-          icon="pixelarticons:info"
-          width={24}
-          height={24}
-          className="shrink-0 text-primary"
-        />
+        <InfoBox width={24} height={24} className="shrink-0 text-primary" />
         <p className="text-sm">
           <strong>Hover over images</strong> to see the pixel art
           transformation. Click "Try These Settings" to apply the same
@@ -91,8 +81,7 @@ export default function ExamplesPage() {
         </div>
       ) : (
         <div className="py-20 text-center">
-          <Icon
-            icon="pixelarticons:image-x"
+          <ImageBroken
             width={48}
             height={48}
             className="mx-auto mb-4 text-muted-foreground"
@@ -115,7 +104,7 @@ export default function ExamplesPage() {
           </p>
           <Button size="lg" asChild>
             <Link href="/create" aria-label="Start Creating">
-              <Icon icon="pixelarticons:sparkles" width={20} height={20} />
+              <Zap width={20} height={20} />
               Start Creating
             </Link>
           </Button>

@@ -1,4 +1,4 @@
-import { Icon } from "@iconify/react";
+import { Image, Upload } from "@/components/icons";
 import { useImageUpload } from "@/hooks/use-upload";
 import { cn } from "@/lib/utils";
 
@@ -26,12 +26,7 @@ export function UploadArea() {
     >
       <div className="space-y-6 text-center">
         <div className="mx-auto flex size-20 items-center justify-center bg-primary/10">
-          <Icon
-            icon="pixelarticons:upload"
-            width={40}
-            height={40}
-            className="text-primary"
-          />
+          <Upload width={40} height={40} className="text-primary" />
         </div>
         <div className="space-y-2">
           <h3 className="font-semibold text-xl">Drop your image here</h3>
@@ -48,12 +43,7 @@ export function UploadArea() {
           aria-label="Upload image"
         />
         <div className="inline-flex h-9 items-center justify-center border bg-primary px-4 font-medium text-primary-foreground text-sm transition-colors hover:bg-primary/90">
-          <Icon
-            icon="pixelarticons:image"
-            width={16}
-            height={16}
-            className="mr-2"
-          />
+          <Image width={16} height={16} className="mr-2" />
           Choose Image
         </div>
         <p className="text-muted-foreground text-xs">

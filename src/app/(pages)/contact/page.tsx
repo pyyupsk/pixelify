@@ -1,6 +1,6 @@
-import { Icon } from "@iconify/react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Clock } from "@/components/icons";
 import { JsonLd } from "@/components/layout/json-ld";
 import { contacts } from "@/constants/contats";
 import { getSiteUrl } from "@/env";
@@ -56,7 +56,7 @@ export default function ContactPage() {
         {/* Contact Methods Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {contacts.map((method) => {
-            const ContactIcon = method.icon;
+            const IconComponent = method.icon;
             return (
               <Link
                 key={method.title}
@@ -69,7 +69,7 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   {/* Icon */}
                   <div className="flex size-12 items-center justify-center bg-primary/10">
-                    <ContactIcon
+                    <IconComponent
                       width={24}
                       height={24}
                       className="text-primary"
@@ -87,11 +87,6 @@ export default function ContactPage() {
                   {/* Link */}
                   <div className="flex items-center gap-2 text-primary text-sm transition-colors group-hover:text-primary/80">
                     <span>{method.label}</span>
-                    <Icon
-                      icon="pixelarticons:arrow-right"
-                      width={16}
-                      height={16}
-                    />
                   </div>
                 </div>
               </Link>
@@ -105,12 +100,7 @@ export default function ContactPage() {
           <div className="border bg-card p-6">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <Icon
-                  icon="pixelarticons:clock"
-                  width={24}
-                  height={24}
-                  className="text-primary"
-                />
+                <Clock width={24} height={24} className="text-primary" />
                 <h2 className="font-semibold text-lg">Response Time</h2>
               </div>
               <p className="text-muted-foreground leading-7">

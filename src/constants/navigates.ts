@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
+import type { ComponentType, SVGProps } from "react";
+import { Book, Gamepad, Home, ImageGallery } from "@/components/icons";
 
 type Sitemap = MetadataRoute.Sitemap[0];
 
 type NavigationItem = {
   href: string;
   label: string;
-  icon: string;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
   match: (pathname: string) => boolean;
   changeFrequency: Sitemap["changeFrequency"];
   priority: Sitemap["priority"];
@@ -15,7 +17,7 @@ export const navigates: NavigationItem[] = [
   {
     href: "/",
     label: "Home",
-    icon: "pixelarticons:home",
+    icon: Home,
     match: (pathname: string) => pathname === "/",
     changeFrequency: "monthly",
     priority: 1,
@@ -23,7 +25,7 @@ export const navigates: NavigationItem[] = [
   {
     href: "/create",
     label: "Create",
-    icon: "pixelarticons:gamepad",
+    icon: Gamepad,
     match: (pathname: string) => pathname === "/create",
     changeFrequency: "monthly",
     priority: 0.9,
@@ -31,7 +33,7 @@ export const navigates: NavigationItem[] = [
   {
     href: "/examples",
     label: "Examples",
-    icon: "pixelarticons:image-gallery",
+    icon: ImageGallery,
     match: (pathname: string) => pathname === "/examples",
     changeFrequency: "monthly",
     priority: 0.9,
@@ -39,7 +41,7 @@ export const navigates: NavigationItem[] = [
   {
     href: "/docs",
     label: "Documentation",
-    icon: "pixelarticons:book",
+    icon: Book,
     match: (pathname: string) => pathname.startsWith("/docs"),
     changeFrequency: "daily",
     priority: 0.7,

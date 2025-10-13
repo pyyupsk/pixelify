@@ -1,0 +1,6 @@
+{
+  "output": "@/components/icons",
+  "typescript": true,
+  "extension": "tsx",
+  "indexFile": true
+}
