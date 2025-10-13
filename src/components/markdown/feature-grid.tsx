@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import type { PropsWithChildren } from "react";
 
 export function FeatureGrid({ children }: Readonly<PropsWithChildren>) {
-  return <div className="my-6 grid gap-4 sm:grid-cols-2">{children}</div>;
+  return <div className="my-6 grid gap-4 lg:grid-cols-2">{children}</div>;
 }
 
 export function Feature({

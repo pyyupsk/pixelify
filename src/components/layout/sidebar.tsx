@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { ComponentProps } from "react";
 import { Logo } from "@/components/brand/logo";
 import {
@@ -13,7 +16,9 @@ import {
   SidebarMenuItem,
   SidebarRail,
   SidebarTrigger,
+  useSidebar,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 
 const sidebars = [
   {
@@ -103,9 +108,12 @@ const sidebars = [
 ];
 
 export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+  const { open } = useSidebar();
+
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
+      <SidebarHeader className="px-4">
         <Link
           href="/"
           className="flex items-center gap-2 font-bold text-xl"
@@ -114,9 +122,14 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
           <Logo size={32} />
           Pixelify
         </Link>
-        <SidebarTrigger className="-right-[44.9px] absolute top-4" />
+        <SidebarTrigger
+          className={cn(
+            "absolute top-4 hidden transition-all md:block",
+            open ? "right-4" : "-right-[44.9px]",
+          )}
+        />
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="px-2">
         {sidebars.map((sidebar) => (
           <SidebarGroup key={sidebar.title}>
             <SidebarGroupLabel>{sidebar.title}</SidebarGroupLabel>
@@ -124,7 +137,10 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
               <SidebarMenu>
                 {sidebar.items.map((subItem) => (
                   <SidebarMenuItem key={subItem.title}>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton
+                      variant={pathname === subItem.url ? "active" : "default"}
+                      asChild
+                    >
                       <Link href={subItem.url}>{subItem.title}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
