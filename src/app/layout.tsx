@@ -1,5 +1,7 @@
 import "@/assets/css/globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
 import { mono, sans } from "@/assets/fonts";
@@ -30,7 +32,11 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
           id="software-application-schema"
         />
       </head>
-      <body className={cn(sans.variable, mono.variable)}>{children}</body>
+      <body className={cn(sans.variable, mono.variable)}>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
