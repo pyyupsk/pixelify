@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { legal } from "@/constants/legal";
 import { navigates } from "@/constants/navigates";
 import { getSiteUrl } from "@/env";
 
@@ -12,5 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: navigate.priority,
   }));
 
-  return [...pages];
+  const legalPages = legal.map((item) => ({
+    url: `${baseUrl}${item.href}`,
+    lastModified: new Date(),
+    changeFrequency: item.changeFrequency,
+    priority: item.priority,
+  }));
+
+  return [...pages, ...legalPages];
 }

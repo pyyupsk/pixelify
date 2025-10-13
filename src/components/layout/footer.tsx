@@ -1,6 +1,8 @@
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
+import { contacts } from "@/constants/contats";
+import { legal } from "@/constants/legal";
 import { navigates } from "@/constants/navigates";
 
 export function Footer() {
@@ -24,6 +26,22 @@ export function Footer() {
               Transform your images into beautiful pixel art. Fast, simple, and
               free forever.
             </p>
+
+            <div className="flex gap-4">
+              {contacts.map((item) => {
+                const ContactIcon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-foreground transition-colors hover:text-foreground/80"
+                    aria-label={item.label}
+                  >
+                    <ContactIcon width={24} height={24} />
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
           {/* Navigation */}
@@ -47,34 +65,16 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold text-sm">Legal</h3>
             <nav className="flex flex-col gap-3">
-              <Link
-                href="/privacy"
-                className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-                aria-label="Privacy Policy"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-                aria-label="Terms of Service"
-              >
-                Terms of Service
-              </Link>
-              <Link
-                href="/license"
-                className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-                aria-label="License"
-              >
-                License
-              </Link>
-              <Link
-                href="/contact"
-                className="text-muted-foreground text-sm transition-colors hover:text-foreground"
-                aria-label="Contact"
-              >
-                Contact
-              </Link>
+              {legal.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+                  aria-label={item.label}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </nav>
           </div>
         </div>
